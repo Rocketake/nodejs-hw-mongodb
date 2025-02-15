@@ -7,16 +7,39 @@ import {
   upsertStudentController,
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { validateBody } from '../middlewares/validateBody.js';
+import {
+  createStudentsValidationSchema,
+  updateStudentsValidationSchema,
+} from '../validation/students.js';
+import { isValid } from '../middlewares/isValid.js';
 
 const router = Router();
 
 router.get('/contacts', ctrlWrapper(getAllContactsController));
 
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
+router.get(
+  '/contacts/:contactId',
+  isValid,
+  ctrlWrapper(getContactByIdController),
+);
 
-router.post('/contacts', ctrlWrapper(createContactController));
+router.post(
+  '/contacts',
+  validateBody(createStudentsValidationSchema),
+  ctrlWrapper(createContactController),
+);
 
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
+router.delete(
+  '/contacts/:contactId',
+  isValid,
+  ctrlWrapper(deleteContactController),
+);
 
-router.patch('/contacts/:contactId', ctrlWrapper(upsertStudentController));
+router.patch(
+  '/contacts/:contactId',
+  isValid,
+  validateBody(updateStudentsValidationSchema),
+  ctrlWrapper(upsertStudentController),
+);
 export default router;
