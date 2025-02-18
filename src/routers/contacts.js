@@ -11,7 +11,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import {
   createStudentsValidationSchema,
   updateStudentsValidationSchema,
-} from '../validation/students.js';
+} from '../validation/contacts.js';
 import { isValid } from '../middlewares/isValid.js';
 
 const router = Router();
