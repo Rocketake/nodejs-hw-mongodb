@@ -13,33 +13,36 @@ import {
   updateStudentsValidationSchema,
 } from '../validation/contacts.js';
 import { isValid } from '../middlewares/isValid.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
-const router = Router();
+const contactsRouter = Router();
 
-router.get('/contacts', ctrlWrapper(getAllContactsController));
+contactsRouter.use(authenticate);
 
-router.get(
-  '/contacts/:contactId',
+contactsRouter.get('/', ctrlWrapper(getAllContactsController));
+
+contactsRouter.get(
+  '/:contactId',
   isValid,
   ctrlWrapper(getContactByIdController),
 );
 
-router.post(
-  '/contacts',
+contactsRouter.post(
+  '/',
   validateBody(createStudentsValidationSchema),
   ctrlWrapper(createContactController),
 );
 
-router.delete(
-  '/contacts/:contactId',
+contactsRouter.delete(
+  '/:contactId',
   isValid,
   ctrlWrapper(deleteContactController),
 );
 
-router.patch(
-  '/contacts/:contactId',
+contactsRouter.patch(
+  '/:contactId',
   isValid,
   validateBody(updateStudentsValidationSchema),
   ctrlWrapper(upsertStudentController),
 );
-export default router;
+export default contactsRouter;
