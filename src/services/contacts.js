@@ -51,10 +51,11 @@ export const getContactByID = async (contactId, userId) => {
   return contact;
 };
 
-export const createContact = async ({ body, user }) => {
+export const createContact = async ({ body, user }, photoUrl) => {
   const contact = await contactsCollection.create({
     ...body,
     userId: user._id,
+    photo: photoUrl,
   });
   return contact;
 };
@@ -72,11 +73,12 @@ export const updateContact = async (
   contactId,
   payload,
   userId,
+  photoUrl,
   options = {},
 ) => {
   const result = await contactsCollection.findOneAndUpdate(
     { _id: contactId, userId: userId },
-    payload,
+    { ...payload, photo: photoUrl },
     {
       new: true,
       ...options,
