@@ -14,7 +14,6 @@ requestBody:
           - name
           - phoneNumber
           - contactType
-          - userId
         properties:
           name:
             description: "Contact's name"
@@ -28,22 +27,18 @@ requestBody:
             description: 'Contact type of phone number'
             type: string
             enum: ['work', 'home', 'personal']
-          userId:
-            description: 'User id'
-            type: string
-            example: 67bf66467fb4b20bdce81eb9
           email:
             description: "Contact's email address"
             type: string
             example: andriy7@example.com
-          isFavorite:
-            description: 'Favorite contact'
+          isFavourite:
+            description: 'Favourite contact'
             type: boolean
             example: true
           photo:
             description: "Link to contact's photo"
             type: string
-            example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+            format: binary
 
 responses:
   '201':

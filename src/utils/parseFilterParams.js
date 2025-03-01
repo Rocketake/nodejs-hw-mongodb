@@ -5,21 +5,21 @@ const parseType = (type) => {
   if (isKnownType) return type;
 };
 
-const parseIsFavorite = (IsFavorite) => {
-  const isBoolean = ['true', 'false'].includes(IsFavorite);
+const parseIsFavourite = (IsFavourite) => {
+  const isBoolean = ['true', 'false'].includes(IsFavourite);
   if (isBoolean) {
-    return IsFavorite === 'true' ? 'true' : 'false';
+    return IsFavourite === 'true' ? 'true' : 'false';
   }
 };
 
 export const parseFilterParams = (query) => {
-  const { type, isFavorite } = query;
+  const { type, isFavourite } = query;
 
   const parsedType = parseType(type);
-  const parsedIsFavorite = parseIsFavorite(isFavorite);
+  const parsedIsFavourite = parseIsFavourite(isFavourite);
 
   return {
     type: parsedType,
-    isFavorite: parsedIsFavorite,
+    isFavourite: parsedIsFavourite,
   };
 };
