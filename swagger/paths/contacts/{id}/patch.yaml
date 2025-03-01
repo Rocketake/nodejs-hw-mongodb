@@ -1,0 +1,73 @@
+tags:
+  - Contacts
+summary: Update contact
+operationId: updateContact
+description: 'Create a contact with payload'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: contactId
+    required: true
+    schema:
+      type: string
+      example: '67bf6a59f6fa542b093a602e'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'John Doe'
+          phoneNumber:
+            description: "Contact's phone number"
+            type: string
+            example: '+380000000006'
+          contactType:
+            description: 'Contact type of phone number'
+            type: string
+            enum: ['work', 'home', 'personal']
+          userId:
+            description: 'User id'
+            type: string
+            example: 67bf66467fb4b20bdce81eb9
+          email:
+            description: "Contact's email address"
+            type: string
+            example: andriy7@example.com
+          isFavorite:
+            description: 'Favorite contact'
+            type: boolean
+            example: true
+          photo:
+            description: "Link to contact's photo"
+            type: string
+            example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+responses:
+  '200':
+    description: Patches a contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully patched a contact!
+            data:
+              type: object
+              $ref: ../../../components/schemas/contact.yaml
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'

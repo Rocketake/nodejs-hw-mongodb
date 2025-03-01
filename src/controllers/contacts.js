@@ -54,8 +54,6 @@ export const getContactByIdController = async (req, res) => {
 export const createContactController = async (req, res) => {
   const photo = req.file;
 
-  console.log(photo);
-
   let photoUrl;
 
   if (photo) {
@@ -70,7 +68,7 @@ export const createContactController = async (req, res) => {
 
   res.status(201).json({
     status: 201,
-    message: `Successfully created a student!`,
+    message: `Successfully created a contact!`,
     data: student,
   });
 };
@@ -90,8 +88,6 @@ export const upsertStudentController = async (req, res, next) => {
   const { contactId } = req.params;
   const { _id } = req.user;
   const photo = req.file;
-
-  console.log(photo);
 
   let photoUrl;
 
